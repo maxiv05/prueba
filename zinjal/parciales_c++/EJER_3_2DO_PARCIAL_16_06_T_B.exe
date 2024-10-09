@@ -1,0 +1,67 @@
+#include <iostream>
+#include <vector>
+#include <matrix>
+using namespace std;
+struct colec {
+	int patente;
+	int cantkm;
+	int pasajeros;
+};                                /// HAY UN ERROR EN EL NOMBRE DEL ARCHIVO CREO /----------------------------------------------------****************
+pair<int,int> patenesmenospasajeros(vector<colec> v) {
+	pair<float,float>p;
+	int mayor=0;
+	int m;
+	int menor=-9999;
+	int n;
+	for(size_t i=0; i<v.size(); i++) {
+		if(v[i].pasajeros>mayor) {
+			menor=mayor;
+			n=m;
+			mayor=v[i].pasajeros;
+			m=v[i].patente;
+		} else {
+			if(v[i].pasajeros>menor) {
+				menor=v[i].pasajeros;
+				n=v[i].patente;
+			}
+		}
+	}
+	p.first=m;
+	p.second=n;
+	return p;
+}
+int kmpromedio(vector<colec> v) {
+	suma=0;
+	for(size_t i=0; i<v.size(); i++) {
+		suma+=v[i].cantkm;
+	}
+	int promedio=suma/v.size();
+	return suma;
+}
+int superarpromedio(vector<colec> v, int kmpromedio) {
+	int contador=0;
+	for(size_t i=0; i<v.size(); i++) {
+		if(v[i].cantkm-kmpromedio>=500) {
+			contador++;
+		}
+	}
+	return contador;
+}
+int main() {
+	int ncolectivos;
+	cin >> ncolectivos;
+	vector<colec> v(ncolectivos);
+	for(size_t i=0; i<v.size(); i++) {
+		cin >> v[i].patente >> v[i].cantkm >> v[i].pasajeros;
+	}
+	pair<int,int> p=patenesmenospasajeros(v);
+	cout << "Las patentes que más personas subieron son: " << p.first << " y " << p.second << endl;
+	cout << "El promedio recorrido entre todos los colectivos es de:";
+	int kmpromedio=kmprom(v);
+	cout << kmpromedio << endl;
+	cout << "La cantidad de colectivos que superan al promedio de km recorridos por 500km es de: ";
+	int superanprom=superarpromedio(v,kmpromedio);
+	cout << superanprom << endl;
+	return 0;
+}
+
